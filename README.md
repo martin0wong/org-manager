@@ -9,7 +9,7 @@
   - Plus / Minus headcount for easier macro management
 
 - Add statistics under entities to show help analyze an entity
-  - examples: 
+  - *examples:* 
     - police - crime numbers/types by districts
     - government - group/department efficiency (kpi satisfaction%, etc)
 
