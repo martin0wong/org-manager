@@ -1,4 +1,4 @@
-# Martin's Personal Project - Organisation Structure Manager
+# Martin's Personal Project - Organization Structure Manager
 
 ## What will the application do?
 
