@@ -26,11 +26,11 @@ confusing the regular members and in some cases command members as well.
 
 Hopefully, with this project, such messy structure will be much easier to
 follow by members in such groups. 
-While also improving transparency of organisations by making data more accessible, briding digital divide.
+While also improving transparency of organisations by making data more accessible, bridging digital divide.
 
 ## User Stories
 - As a user, I want to be able to add a division to my department.
 - As a user, I want to be able to delete a division from my department.
 - As a user, I want to be able to see the list of division(s) in my department.
 - As a user, I want to be able to select a division and see the total member count of it.
-- As a user, I want to be able to change the performance status of the division.
+- As a user, I want to be able to assign a task to the division.
