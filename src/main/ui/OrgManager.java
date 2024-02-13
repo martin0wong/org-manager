@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-// Bank teller application
+// Organization Manager application
 public class OrgManager {
     private OrgEntity sus;
     private OrgEntity csss;
