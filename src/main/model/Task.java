@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // class for representing tasks for sub-entities
-public class Task {
+public class Task implements Writable {
     private String taskName;
 
     // EFFECTS: construct a task with a name
@@ -17,5 +20,12 @@ public class Task {
     // GETTERS
     public String getName() {
         return taskName;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("taskName", taskName);
+        return json;
     }
 }

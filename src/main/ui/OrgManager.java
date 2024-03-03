@@ -1,21 +1,30 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 
 // Organization Manager application
 public class OrgManager {
-    private OrgEntity sus;
-    private OrgEntity csss;
+    private static final String JSON_STORE = "./data/OrgManager.json";
+    private OrgEntity org;
     private Scanner input;
-    private OrgEntity currentOrg;
     private SubEntity currentSub;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the teller application
-    public OrgManager() {
+    public OrgManager() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runManager();
     }
 
@@ -25,8 +34,15 @@ public class OrgManager {
         boolean keepGoing = true;
         String command = null;
 
-        init();
-        selectOrgEntity();
+        System.out.println("Load Organization? (y/n)");
+        command = input.next();
+        command = command.toLowerCase();
+        if (command.equals("y")) {
+            loadOrg();
+        } else {
+            org = createOrg();
+        }
+
 
         while (keepGoing) {
             displayMenu();
@@ -54,35 +70,40 @@ public class OrgManager {
             removeSubEntity();
         } else if (command.equals("sm")) {
             seeSubHeadCount();
+        } else if (command.equals("stl")) {
+            seeSubTasks();
         } else if (command.equals("sl")) {
             seeSubList();
-        } else if (command.equals("so")) {
-            selectOrgEntity();
+        } else if (command.equals("s")) {
+            saveOrg();
+        } else if (command.equals("l")) {
+            loadOrg();
         } else {
             System.out.println("Command not valid!");
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: initializes organizations
-    private void init() {
-        sus = new OrgEntity("Science Undergraduate Society");
-        csss = new OrgEntity("Computer Science Student Society");
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
-
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
-        System.out.println("Current organization: " + currentOrg.getOrgName());
+        System.out.println("Current organization: " + org.getOrgName());
         System.out.println("Select from:");
         System.out.println("\ta -> add sub-entity");
         System.out.println("\tat -> add task to sub-entity");
         System.out.println("\tr -> remove sub-entity");
         System.out.println("\tsm -> see sub-entity headCount");
+        System.out.println("\tstl -> see sub-entity task list");
         System.out.println("\tsl -> see list of sub-entity");
-        System.out.println("\tso -> select different organization");
+        System.out.println("\ts -> save organization to file");
+        System.out.println("\tl -> load organization from file");
         System.out.println("\tq -> quit");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: create the organization to initiate the manager
+    private OrgEntity createOrg() {
+        System.out.println("Enter new Organization name: ");
+        String orgName = input.next();
+        return new OrgEntity(orgName);
     }
 
     // MODIFIES: this
@@ -95,7 +116,7 @@ public class OrgManager {
 
         SubEntity newSub = new SubEntity(subName, subHeadCount);
 
-        currentOrg.addSubEntity(newSub);
+        org.addSubEntity(newSub);
         System.out.printf("%s has been created as a sub-entity and added to list successfully!%n", subName);
     }
 
@@ -119,8 +140,8 @@ public class OrgManager {
     private void removeSubEntity() {
         currentSub = selectSubEntity();
         if (currentSub != null) {
-            currentOrg.removeSubEntity(currentSub);
-            System.out.printf("%s removed from %s successfully!%n", currentSub.getName(), currentOrg.getOrgName());
+            org.removeSubEntity(currentSub);
+            System.out.printf("%s removed from %s successfully!%n", currentSub.getName(), org.getOrgName());
         }
     }
 
@@ -133,37 +154,30 @@ public class OrgManager {
         }
     }
 
+    // EFFECT: see the headcount of selected sub-entity
+    private void seeSubTasks() {
+        currentSub = selectSubEntity();
+
+        if (currentSub != null) {
+            System.out.printf("%s has %s tasks. %n", currentSub.getName(), currentSub.getTaskList().size());
+            for (Task t : currentSub.getTaskList()) {
+                System.out.println("\t" + t.getName());
+            }
+        }
+    }
+
     // EFFECT: see the list of sub-entity under current organization, returns true when list not empty, false otherwise
     private boolean seeSubList() {
-        LinkedList<SubEntity> list = currentOrg.getSubEntityList();
+        LinkedList<SubEntity> list = org.getSubEntityList();
         if (list.size() == 0) {
             System.out.println("No sub-entities under current organization!");
             return false;
         } else {
-            System.out.printf("List of sub-entities under %s: %n", currentOrg.getOrgName());
+            System.out.printf("List of sub-entities under %s: %n", org.getOrgName());
             for (SubEntity i : list) {
                 System.out.println("\t" + i.getName());
             }
             return true;
-        }
-
-    }
-
-    // EFFECT: select organization to be viewed on manager
-    private void selectOrgEntity() {
-        String selection = "";
-
-        while (!(selection.equals("sus") || selection.equals("csss"))) {
-            System.out.println("sus for Science Undergraduate Society");
-            System.out.println("csss for Computer Science Student Society");
-            selection = input.next();
-            selection = selection.toLowerCase();
-        }
-
-        if (selection.equals("sus")) {
-            currentOrg = sus;
-        } else {
-            currentOrg = csss;
         }
     }
 
@@ -174,14 +188,38 @@ public class OrgManager {
             System.out.println("Enter name of sub-entity to select it: ");
             selection = input.next();
 
-            if (currentOrg.findSubEntity(selection) != null) {
-                return currentOrg.findSubEntity(selection);
+            if (org.findSubEntity(selection) != null) {
+                return org.findSubEntity(selection);
             } else {
-                System.out.printf("Entered sub-entity name not found in %s %n", currentOrg.getOrgName());
+                System.out.printf("Entered sub-entity name not found in %s %n", org.getOrgName());
                 return null;
             }
         } else {
             return null;
         }
     }
+
+    // EFFECTS: saves the workroom to file
+    private void saveOrg() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(org);
+            jsonWriter.close();
+            System.out.println("Saved " + org.getOrgName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadOrg() {
+        try {
+            org = jsonReader.read();
+            System.out.println("Loaded " + org.getOrgName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

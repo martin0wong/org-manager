@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 
 // class for OrgEntities which hold SubEntities
-public class OrgEntity {
+public class OrgEntity implements Writable {
     private LinkedList<SubEntity> subEntityList;
     private String orgName;
 
@@ -51,4 +55,20 @@ public class OrgEntity {
         return subEntityList;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("orgName", orgName);
+        json.put("subOrgs", subEntitiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this organization as a JSON array
+    private JSONArray subEntitiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (SubEntity sub : subEntityList) {
+            jsonArray.put(sub.toJson());
+        }
+        return jsonArray;
+    }
 }

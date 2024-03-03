@@ -1,0 +1,15 @@
+{
+  "subOrgs": [
+    {
+      "subOrgName": "Internal",
+      "headCount": 10,
+      "tasks": [{"taskName": "a"}]
+    },
+    {
+      "subOrgName": "External",
+      "headCount": 5,
+      "tasks": []
+    }
+  ],
+  "orgName": "csss"
+}

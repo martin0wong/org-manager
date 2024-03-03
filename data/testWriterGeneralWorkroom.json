@@ -1,0 +1,15 @@
+{
+    "subOrgs": [
+        {
+            "subOrgName": "Social",
+            "headCount": 6,
+            "tasks": [{"taskName": "Talk"}]
+        },
+        {
+            "subOrgName": "Communication",
+            "headCount": 4,
+            "tasks": []
+        }
+    ],
+    "orgName": "csss"
+}
