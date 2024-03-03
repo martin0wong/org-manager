@@ -34,3 +34,5 @@ While also improving transparency of organisations by making data more accessibl
 - As a user, I want to be able to see the list of division(s) in my department.
 - As a user, I want to be able to select a division and see the total member count of it.
 - As a user, I want to be able to assign a task to the division I selected.
+- As a user, I want to be given the option to save my organization and it's divisions.
+- As a user, I want to be given the option for load my organization and it's divisions.
