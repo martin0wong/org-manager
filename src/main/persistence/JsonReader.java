@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 import org.json.*;
 
+// CITATION: similar to the demo given
 // Represents a reader that reads OrgEntity from JSON data stored in file
 public class JsonReader {
     private String source;
