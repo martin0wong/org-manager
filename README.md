@@ -49,3 +49,6 @@ Users will be prompted to load and or save their organization when opening/closi
 
 ### Visual Component
 All visual components are observable once entering the main screen, saving prompt has its own icon as well.
+
+## Credit
+All icons used are from [uxwing](https://uxwing.com/license/), credit was not necessary but given here.
