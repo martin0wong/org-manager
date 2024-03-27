@@ -1,15 +1,15 @@
 {
     "subOrgs": [
         {
-            "subOrgName": "1",
-            "headCount": 10,
-            "tasks": [{"taskName": "a"}]
+            "subOrgName": "Internal",
+            "headCount": 50,
+            "tasks": []
         },
         {
-            "subOrgName": "2",
+            "subOrgName": "External",
             "headCount": 20,
-            "tasks": []
+            "tasks": [{"taskName": "PARTY!"}]
         }
     ],
-    "orgName": "csss"
+    "orgName": "sus"
 }

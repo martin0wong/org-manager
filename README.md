@@ -37,3 +37,15 @@ While also improving transparency of organisations by making data more accessibl
 - As a user, I want to be able to assign a task to the division I selected.
 - As a user, I want to be given the option to save my organization and it's divisions.
 - As a user, I want to be given the option for load my organization and it's divisions.
+
+## Instructions for Grader
+Enter the information as prompted for all functions.
+### Add multiple Xs to a Y
+Click the add button for new sub-entity to add a new sub-entity under the organization.
+Click the add button for new tasks to add a new task to an existing sub-entity.
+
+### Loading and Saving
+Users will be prompted to load and or save their organization when opening/closing the software.
+
+### Visual Component
+All visual components are observable once entering the main screen, saving prompt has its own icon as well.

@@ -199,7 +199,7 @@ public class OrgManager {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the Org to file
     private void saveOrg() {
         try {
             jsonWriter.open();
@@ -212,7 +212,7 @@ public class OrgManager {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads Org from file
     private void loadOrg() {
         try {
             org = jsonReader.read();
