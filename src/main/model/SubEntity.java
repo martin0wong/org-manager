@@ -23,6 +23,7 @@ public class SubEntity implements Writable {
     // EFFECTS: add a task for the sub-entity
     public void addTask(Task task) {
         taskList.addLast(task);
+        EventLog.getInstance().logEvent(new Event("Task: " + task.getName() + " is added to " + entityName));
     }
 
     // MODIFIES: this
@@ -48,19 +49,23 @@ public class SubEntity implements Writable {
     }
 
     public int getHeadCount() {
+        EventLog.getInstance().logEvent(new Event("Headcount of " + entityName + " retrieved"));
         return headCount;
     }
 
     public LinkedList<Task> getTaskList() {
+        EventLog.getInstance().logEvent(new Event("List of tasks of " + entityName + " retrieved"));
         return taskList;
     }
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        EventLog.getInstance().logEvent(new Event("Saving " + entityName + " to JSON"));
         json.put("subOrgName", entityName);
         json.put("headCount", headCount);
         json.put("tasks", tasksToJson());
+        EventLog.getInstance().logEvent(new Event("Sub entity: " + entityName + " saved to JSON"));
         return json;
     }
 

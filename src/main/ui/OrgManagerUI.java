@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.OrgEntity;
 import model.SubEntity;
 import model.Task;
@@ -258,7 +260,6 @@ public class OrgManagerUI extends JFrame {
 
     // Represents action to be taken when prompting the user to save the organization.
     private class SaveOrgAction extends WindowAdapter {
-
         // EFFECT: saves the Org to file
         @Override
         public void windowClosing(WindowEvent evt) {
@@ -274,12 +275,15 @@ public class OrgManagerUI extends JFrame {
                     jsonWriter.write(org);
                     jsonWriter.close();
                     JOptionPane.showMessageDialog(null, systemOutput(1), "Saving Org", JOptionPane.PLAIN_MESSAGE);
+                    printLog();
                     System.exit(0);
                 } catch (FileNotFoundException e) {
                     JOptionPane.showMessageDialog(null, systemOutput(2), "Saving Org", JOptionPane.ERROR_MESSAGE);
+                    printLog();
                     System.exit(0);
                 }
             } else {
+                printLog();
                 System.exit(0);
             }
         }
@@ -293,6 +297,13 @@ public class OrgManagerUI extends JFrame {
             JOptionPane.showMessageDialog(null, systemOutput(3), "Loading Org", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, systemOutput(4), "Loading Org", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // EFFECTS: print out EventLog to console
+    private void printLog() {
+        for (Event next : EventLog.getInstance()) {
+            System.out.println(next.toString() + "\n");
         }
     }
 

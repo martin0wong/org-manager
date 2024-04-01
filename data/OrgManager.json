@@ -3,12 +3,12 @@
         {
             "subOrgName": "Internal",
             "headCount": 50,
-            "tasks": []
+            "tasks": [{"taskName": "Another task"}]
         },
         {
-            "subOrgName": "External",
-            "headCount": 20,
-            "tasks": [{"taskName": "PARTY!"}]
+            "subOrgName": "Academic",
+            "headCount": 10,
+            "tasks": [{"taskName": "Host Midterm Review Session"}]
         }
     ],
     "orgName": "sus"

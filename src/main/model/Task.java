@@ -26,6 +26,7 @@ public class Task implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("taskName", taskName);
+        EventLog.getInstance().logEvent(new Event("Task: " + taskName + " saved to JSON"));
         return json;
     }
 }

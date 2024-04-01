@@ -21,6 +21,7 @@ public class OrgEntity implements Writable {
     // EFFECTS: add a subgroup under the organizational level entity
     public void addSubEntity(SubEntity sub) {
         subEntityList.addLast(sub);
+        EventLog.getInstance().logEvent(new Event("Sub entity: " + sub.getName() + " is added to " + orgName));
     }
 
     // REQUIRES: subEntityList not empty
@@ -28,6 +29,7 @@ public class OrgEntity implements Writable {
     // EFFECTS: remove a subgroup under the organizational level entity
     public void removeSubEntity(SubEntity sub) {
         subEntityList.remove(sub);
+        EventLog.getInstance().logEvent(new Event("Sub entity: " + sub.getName() + " is removed from " + orgName));
     }
 
     // REQUIRES: subEntityList not empty
@@ -52,14 +54,17 @@ public class OrgEntity implements Writable {
     }
 
     public LinkedList<SubEntity> getSubEntityList() {
+        EventLog.getInstance().logEvent(new Event("List of sub entities retrieved"));
         return subEntityList;
     }
 
     @Override
     public JSONObject toJson() {
+        EventLog.getInstance().logEvent(new Event("Saving " + orgName + " to JSON"));
         JSONObject json = new JSONObject();
         json.put("orgName", orgName);
         json.put("subOrgs", subEntitiesToJson());
+        EventLog.getInstance().logEvent(new Event(orgName + " saved to JSON"));
         return json;
     }
 
