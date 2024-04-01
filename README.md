@@ -107,3 +107,7 @@ Sun Mar 31 23:07:55 PDT 2024
 Sub entity: Academic saved to JSON\
 Sun Mar 31 23:07:55 PDT 2024
 sus saved to JSON
+
+## Phase 4: Task 3
+To improve my design, a refactoring could be done to ensure each OrgEntity/SubEntity have at least 1 SubEntity/Task in the list inside the class, though this is a tradeoff on allowing users to create a blank organization and use the application for planning purposes before entering the whole structure in versus preventing an empty organization to being created.
+Another refactoring I could make would be reducing the dependence between the classes, such as allowing users to create a standalone sub-entity with/without task then add it to the org entity instead of the current ladder like structure I implemented. This gives more freedom for the user when using the applicaiton.
