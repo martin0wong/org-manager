@@ -1,15 +1,8 @@
 {
-    "subOrgs": [
-        {
-            "subOrgName": "Internal",
-            "headCount": 50,
-            "tasks": [{"taskName": "Another task"}]
-        },
-        {
-            "subOrgName": "Academic",
-            "headCount": 10,
-            "tasks": [{"taskName": "Host Midterm Review Session"}]
-        }
-    ],
-    "orgName": "sus"
+    "subOrgs": [{
+        "subOrgName": "CPSC 210",
+        "headCount": 10,
+        "tasks": [{"taskName": "Study the final"}]
+    }],
+    "orgName": "Study Club"
 }

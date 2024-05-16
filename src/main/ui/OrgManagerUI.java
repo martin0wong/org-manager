@@ -45,7 +45,8 @@ public class OrgManagerUI extends JFrame {
             loadOrg();
             frame = new JFrame("Organization Manager - " + org.getOrgName());
         } else {
-            frame = new JFrame("Organization Manager - " + userInput("What is the organization's name?"));
+            org = new OrgEntity(userInput("What is the organization's name?"));
+            frame = new JFrame("Organization Manager - " + org.getOrgName());
         }
         addButtonPanel(frame);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

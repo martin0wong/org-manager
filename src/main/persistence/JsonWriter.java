@@ -4,7 +4,6 @@ import model.OrgEntity;
 import java.io.*;
 import org.json.JSONObject;
 
-// CITATION: similar to the demo given
 // Represents a writer that writes JSON representation of OrgEntity to file
 public class JsonWriter {
     private static final int TAB = 4;
