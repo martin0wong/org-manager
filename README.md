@@ -10,7 +10,7 @@
 
 ## Who will use it?
 
-Anyone! If you need to manage your organization (e.g. online groups), this tool will help you.
+Anyone! If you need to manage your organization (e.g. online groups, clubs), this tool will help you.
 
 ## Why is this project of interest to you?
 
